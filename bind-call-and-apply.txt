@@ -1,0 +1,18 @@
+This is an article about this. If that makes sense to you then keep reading.
+
+bind
+Returns a new function where this is bound to the passed object. Its a little like monkey-patching an object with a new method
+
+call
+Instantly calls the new function. Param 1 is this, all subsequent parameters are the function arguments
+
+apply
+Similar to call. Instantly calls the new function. Param 1 is this, param 2 is an array of the function arguments
+
+Bonus
+Arrow functions - unlike regular JavaScript functions, arrow functions use the context in which they are created as this. Usually this means you can avoid the three things above.
+
+bonus bonus: lexical scope
+This can be thought of as the scope that we create within the structure of our code eg any time we use let or const.
+This sits outside of this as its set dynamically.
+We tend to use bind, call, apply and arrow functions to make this behave as if it is lexically scoped (though bind, call and apply can actually set the scope to anything)
