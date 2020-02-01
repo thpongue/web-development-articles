@@ -1,0 +1,25 @@
+The article talks about the javascript event loop, call stack, message queue and job queue.
+
+JavaScript is single-threaded, but must be able to handle timeouts and callbacks
+
+There is a single process for running all JavaScript code: The event loop. There is usually 1 event loop per browser tab.
+
+Newer constructs like web workers get their own event loop.
+
+If the browser event loop is blocked by an infinite loop or something similar this will stop everything - scrolling, UI rendering, other JavaScript etc.
+
+The call stack is a LIFO system for choosing which function to call next. Whilst running any function it looks for other functions to add to the stack.
+
+Each iteration of executing the top function and finding a new function to add to the top of the stack is a tick.
+
+If you add in a command like this: setTimeout(() => {}), 0); it instructs JavaScript to add the function to the message queue once the 0 ms timer has completed.
+
+The message queue is also responsible for user-initiated events like clicks, DOM events like onLoad etc
+
+No messages are added from the message queue to the call stack until the call stack is empty.
+
+If you have ever written an infinite loop the error you get is always caused by the call stack getting too long. A hacky solution is instead to use setTimeout with 0 milliseconds so each function is instead added to the message queue.
+
+ES6 introduced a new concept, which is used by promises. This is the Job queue. This allows asynchronous functions to be added to the top of the call stack.
+
+Eg if a promise is resolved before the current function ends then its callback function will be called next, rather than once the call stack has been emptied.
